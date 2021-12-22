@@ -51,6 +51,11 @@ export default function VideoViewer() {
     }, [math.params[0], location]);
 
     const classes = useStyles();
+    let _name = query.get("name");
+    if (!pathHelper.isSharePage(location.pathname)) {
+        const path = query.get("p").split("/");
+        _name = path[path.length - 1];
+    }
     return (
         <div className={classes.layout}>
             <Paper className={classes.root} elevation={1}>
@@ -71,6 +76,12 @@ export default function VideoViewer() {
                                           : "")
                                     : "/file/preview/" + query.get("id")),
                         },
+                        subtitle: {
+                            url: 'https://nas2.ippix86.com:8893/ippi/subs/' + _name + '.vtt',
+                            type: 'webvtt',
+                            fontSize: '25px',
+                            bottom: '0%',
+                        }
                     }}
                 />
             </Paper>
